@@ -1,0 +1,64 @@
+<nav class="navbar navbar-light bg-faded">
+  <div class="container">
+    <h1 class="navbar-brand mb-0">Sudoku resolver</h1>
+  </div>
+
+</nav>
+
+<div class="container">
+
+  <div class="form-inline mt-3">
+    <input #load id="load" type="file" class="form-control-file mr-2" name="load" accept="text/csv"
+           (change)="changeListener($event)">
+    <button class="btn btn-sm btn-outline-primary" (click)="reset()">Reset</button>
+  </div>
+
+  <hr>
+
+  <div *ngIf="isLoaded()">
+    <div class="row">
+      <div class="col-lg-4">
+        <table style="border-spacing: 0">
+          <tbody>
+          <tr *ngFor="let row of getInitialGrid()">
+            <td *ngFor="let cell of row" style="text-align: center; vertical-align: middle">
+              <div style="border: solid black 1px; width: 30px; height: 30px;">
+                {{ cell == '0' ? '' : cell }}
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-lg-4">
+        <button class="btn btn-primary mt-2 mb-2" (click)="solve()">Solve with backtracing</button>
+        <button class="btn btn-info mt-2 mb-2" (click)="solveWithDLX()">Solve with DLX</button>
+        <p *ngIf="isSolved()">Solved in {{solvedTime / 1000}}s</p>
+        <div *ngIf="isUnSolved()" class="alert alert-danger" role="alert">
+          Failed to solve this one !
+        </div>
+      </div>
+
+      <div *ngIf="!isSolved()" class="col-lg-4">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': getProgress()}"></div>
+        </div>
+      </div>
+
+      <div *ngIf="isSolved()" class="col-lg-4">
+        <table class="float-lg-right">
+          <tbody>
+          <tr *ngFor="let row of getGrid()">
+            <td *ngFor="let cell of row" style="text-align: center; vertical-align: middle">
+              <div style="border: solid black 1px; width: 30px; height: 30px;">
+                {{ cell }}
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
