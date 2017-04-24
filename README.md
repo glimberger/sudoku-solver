@@ -29,6 +29,6 @@ Take the Sudoku matrix as an exact cover problem and used the Donald E. Knuth's 
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
-
+Run `ng serve` for a dev server (angular CLI required).    
+Navigate to `http://localhost:4200/`. 
 
